@@ -1,47 +1,82 @@
 package edu.tallerweb.cuentas;
 
+/**
+ * La más compleja de las cuentas, ésta permite establecer una cantidad de
+ * dinero a girar en descubierto. Es por ello que cada vez que se desee extraer
+ * dinero, no sólo se considera el que se posee, sino el límite adicional que el
+ * banco estará brindando.
+ * 
+ * Por supuesto esto no es gratis, ya que el banco nos cobrará un 5% como
+ * comisión sobre todo el monto en descubierto consumido en la operación.
+ * 
+ * Por ejemplo, si tuviéramos $ 100 en la cuenta, y quisiéramos retirar $ 200
+ * (con un descubierto de $ 150), podremos hacerlo. Pasaremos a deberle al banco
+ * $ 105 en total: los $ 100 que nos cubrió, más el 5% adicional sobre el
+ * descubierto otorgado.
+ */
 public class CuentaCorriente extends CuentaSueldo {
 
 	private Double descubiertoTotal = 0.0;
 	private Double aux = 0.0;
-	private Double debe = 0.0;
+	private Double comision = 0.0;
 
+	/**
+	 * Toda cuenta corriente se inicia con un límite total para el descubierto.
+	 * 
+	 * @param descubiertoTotal
+	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
 
-		if (descubiertoTotal >= 0) {
+		if ( descubiertoTotal >= 0) {
 			this.descubiertoTotal = descubiertoTotal;
 			this.aux = descubiertoTotal;
 		}
 
 		else {
-			throw new RuntimeException("ingrese un monto valido");
+			throw new CuentaBancariaException("ingrese un monto valido");
 		}
 
 	}
 
+	/**
+	 * Todo depósito deberá cubrir primero el descubierto, si lo hubiera, y
+	 * luego contar para el saldo de la cuenta.
+	 * 
+	 * @param monto
+	 *            a depositar
+	 */
 	@Override
 	public void depositar(final Double monto) {
-
+		
 		super.depositar(monto);
-
+		
+		
+		
 		try {
-			if (monto > this.debe) {
-				super.extraer(this.debe);
+			if (monto > this.comision) {
+				super.extraer(this.comision);
 				this.descubiertoTotal = this.aux;
-				this.debe = 0.0;
+				this.comision = 0.0;
 			}
 
 			else {
-				throw new RuntimeException();
+				throw new CuentaBancariaException("");
 			}
-		} catch (RuntimeException ex) {
+		} catch (CuentaBancariaException ex) {
 			super.extraer(monto);
-			throw new RuntimeException(
-					"Monto menor al monto descubierto consumido");
+			
 		}
 
 	}
 
+	/**
+	 * Se cobrará el 5% de comisión sobre el monto girado en descubierto. Por
+	 * supuesto, no puede extraerse más que el total de la cuenta, más el
+	 * descubierto (comisión incluída)
+	 * 
+	 * @param monto
+	 *            a extraer
+	 */
 	@Override
 	public void extraer(final Double monto) {
 
@@ -50,33 +85,36 @@ public class CuentaCorriente extends CuentaSueldo {
 			try {
 				super.extraer(monto);
 			} catch (RuntimeException ex) {
-				this.comisionDebe(monto);
-				this.descubiertoTotal = this.descubiertoTotal
-						- (monto - this.getSaldo());
+				this.comisionDescubierto(monto);
+				this.descubiertoTotal = this.descubiertoTotal - this.comision;
 				super.extraer(this.getSaldo());
 			}
 		}
 
 		else {
-			throw new RuntimeException(
-					"El monto a extraer es mayor al (saldo + descubierto) disponible");
+			throw new CuentaBancariaException("El monto a extraer es mayor al (saldo + descubierto) disponible");
 		}
 
 	}
 
+	/**
+	 * Permite saber el saldo en descubierto
+	 * 
+	 * @return el descubierto de la cuenta
+	 */
 	public Double getDescubierto() {
 		return this.descubiertoTotal;
 	}
 
-	public void comisionDebe(final Double monto) {
+	public void comisionDescubierto(final Double monto) {
 		Double porcentaje = 0.05;
-		Double debe = monto - this.getSaldo();
+		Double comision = monto - this.getSaldo();
 
-		this.debe += (debe * porcentaje) + debe;
+		this.comision = (comision * porcentaje) + comision;
 	}
 
-	public Double getDebe() {
-		return debe;
+	public Double getComision() {
+		return comision;
 	}
 
 }
