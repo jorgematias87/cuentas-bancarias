@@ -9,35 +9,11 @@ public class CuentaSueldo extends AbstractCuenta {
 
 	/**
 	 * No hay reglas adicionales para el depósito
-	 * 
-	 * @param monto
-	 *            a depositar
 	 */
-	public void depositar(final Double monto) {
-
-		super.montoNegativo(monto);
-		this.saldo += monto;
-	}
+	
 
 	/**
 	 * No hay reglas adicionales para la extracción
-	 * 
-	 * @param monto
-	 *            a extraer
 	 */
-	public void extraer(final Double monto) {
-
-		super.montoNegativo(monto);
-
-		if (this.saldo >= monto) {
-			this.saldo -= monto;
-		}
-
-		else {
-			throw new CuentaBancariaException(
-					"El monto a extraer es mayor al saldo disponible");
-		}
-
-	}
 
 }

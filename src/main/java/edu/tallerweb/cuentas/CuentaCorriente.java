@@ -14,7 +14,7 @@ package edu.tallerweb.cuentas;
  * $ 105 en total: los $ 100 que nos cubrió, más el 5% adicional sobre el
  * descubierto otorgado.
  */
-public class CuentaCorriente extends CuentaSueldo {
+public class CuentaCorriente extends AbstractCuenta {
 
 	private Double descubiertoTotal = 0.0;
 	private Double descubiertoInicial = 0.0;
@@ -22,18 +22,18 @@ public class CuentaCorriente extends CuentaSueldo {
 
 	/**
 	 * Toda cuenta corriente se inicia con un límite total para el descubierto.
-	 * 
 	 * @param descubiertoTotal
 	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
 
-		if (descubiertoTotal >= 0) {
+		if (descubiertoTotal >= 0) 
+		{
 			this.descubiertoTotal = descubiertoTotal;
 			this.descubiertoInicial = descubiertoTotal;
 		}
 
 		else {
-			throw new CuentaBancariaException("ingrese un monto valido");
+			throw new CuentaBancariaException("Monto Invalido");
 		}
 
 	}
@@ -41,16 +41,15 @@ public class CuentaCorriente extends CuentaSueldo {
 	/**
 	 * Todo depósito deberá cubrir primero el descubierto, si lo hubiera, y
 	 * luego contar para el saldo de la cuenta.
-	 * 
-	 * @param monto
-	 *            a depositar
+	 * @param monto a depositar
 	 */
 	@Override
 	public void depositar(final Double monto) {
 
 		super.montoNegativo(monto);
 
-		if (this.comision == 0) {
+		if (this.comision == 0) 
+		{
 
 			super.depositar(monto);
 		}
@@ -65,16 +64,15 @@ public class CuentaCorriente extends CuentaSueldo {
 	 * Se cobrará el 5% de comisión sobre el monto girado en descubierto. Por
 	 * supuesto, no puede extraerse más que el total de la cuenta, más el
 	 * descubierto (comisión incluída)
-	 * 
-	 * @param monto
-	 *            a extraer
+	 * @param monto a extraer
 	 */
 	@Override
 	public void extraer(final Double monto) {
 
 		super.montoNegativo(monto);
 
-		if (monto <= (super.getSaldo() + this.descubiertoTotal)) {
+		if (monto <= (super.getSaldo() + this.descubiertoTotal)) 
+		{
 
 			try {
 				super.extraer(monto);
@@ -93,7 +91,8 @@ public class CuentaCorriente extends CuentaSueldo {
 
 	public void restaurarDescubierto(final Double monto) {
 
-		if ((monto + this.descubiertoTotal) < this.descubiertoInicial) {
+		if ((monto + this.descubiertoTotal) < this.descubiertoInicial) 
+		{
 			this.descubiertoTotal += monto;
 		}
 
@@ -115,7 +114,8 @@ public class CuentaCorriente extends CuentaSueldo {
 
 		this.comisionDescubierto(monto);
 
-		if ((this.descubiertoTotal - this.comision) < 0) {
+		if ((this.descubiertoTotal - this.comision) < 0) 
+		{
 			throw new CuentaBancariaException(
 					"El monto a extraer es mayor al descubierto con impuesto disponible");
 		}
@@ -129,7 +129,6 @@ public class CuentaCorriente extends CuentaSueldo {
 
 	/**
 	 * Permite saber el saldo en descubierto
-	 * 
 	 * @return el descubierto de la cuenta
 	 */
 	public Double getDescubierto() {
