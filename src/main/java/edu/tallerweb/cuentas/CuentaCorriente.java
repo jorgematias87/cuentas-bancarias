@@ -26,11 +26,9 @@ public class CuentaCorriente extends AbstractCuenta {
 	 */
 	public CuentaCorriente(final Double descubiertoTotal) {
 
-		if (descubiertoTotal >= 0) 
-		{
+		if (descubiertoTotal >= 0) {
 			this.descubiertoTotal = descubiertoTotal;
-			this.descubiertoInicial = descubiertoTotal;
-		}
+			this.descubiertoInicial = descubiertoTotal;}
 
 		else {
 			throw new CuentaBancariaException("Monto Invalido");
@@ -48,11 +46,9 @@ public class CuentaCorriente extends AbstractCuenta {
 
 		super.montoNegativo(monto);
 
-		if (this.comision == 0) 
-		{
+		if (this.comision == 0) {
 
-			super.depositar(monto);
-		}
+			super.depositar(monto);}
 
 		else {
 			this.restaurarDescubierto(monto);
@@ -71,16 +67,13 @@ public class CuentaCorriente extends AbstractCuenta {
 
 		super.montoNegativo(monto);
 
-		if (monto <= (super.getSaldo() + this.descubiertoTotal)) 
-		{
+		if (monto <= (super.getSaldo() + this.descubiertoTotal)) {
 
 			try {
 				super.extraer(monto);
 			} catch (CuentaBancariaException ex) {
 				this.extraerEnDescubierto(monto);
-			}
-
-		}
+			}}
 
 		else {
 			throw new CuentaBancariaException(
@@ -91,16 +84,13 @@ public class CuentaCorriente extends AbstractCuenta {
 
 	public void restaurarDescubierto(final Double monto) {
 
-		if ((monto + this.descubiertoTotal) < this.descubiertoInicial) 
-		{
-			this.descubiertoTotal += monto;
-		}
+		if ((monto + this.descubiertoTotal) < this.descubiertoInicial) {
+			this.descubiertoTotal += monto;}
 
 		else {
 			if (monto == this.descubiertoInicial) {
 				super.depositar(this.descubiertoTotal);
-				this.descubiertoTotal = this.descubiertoInicial;
-			}
+				this.descubiertoTotal = this.descubiertoInicial;}
 
 			else {
 				super.depositar((monto + this.descubiertoTotal)
@@ -114,11 +104,9 @@ public class CuentaCorriente extends AbstractCuenta {
 
 		this.comisionDescubierto(monto);
 
-		if ((this.descubiertoTotal - this.comision) < 0) 
-		{
+		if ((this.descubiertoTotal - this.comision) < 0) {
 			throw new CuentaBancariaException(
-					"El monto a extraer es mayor al descubierto con impuesto disponible");
-		}
+					"El monto a extraer es mayor al descubierto con impuesto disponible");}
 
 		else {
 			this.descubiertoTotal -= this.comision;
