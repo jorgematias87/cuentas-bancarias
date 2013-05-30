@@ -12,8 +12,8 @@ public class CajaAhorros extends AbstractCuenta {
 	 */
 
 	private int cont = 0;
-	private int extraccion = 5;
-	private Double costoAdicional = 6.0;
+	private final int extraccion = 5;
+	private final Double costoAdicional = 6.0;
 
 	/**
 	 * Se cobran $6 adicionales por cada extracción luego de la quinta.

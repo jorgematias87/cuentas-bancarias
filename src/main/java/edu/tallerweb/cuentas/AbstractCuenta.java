@@ -8,7 +8,7 @@ package edu.tallerweb.cuentas;
  */
 public abstract class AbstractCuenta {
 
-	private Double saldo = 0.0;
+	protected Double saldo = 0.0;
 
 	/**
 	 * Agrega a la cuenta el monto determinado
@@ -55,10 +55,6 @@ public abstract class AbstractCuenta {
 	 */
 	public Double getSaldo() {
 		return saldo;
-	}
-	
-	public void setSaldo(Double saldo) {
-		this.saldo = saldo;
 	}
 
 }
