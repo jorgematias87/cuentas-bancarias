@@ -39,7 +39,10 @@ public abstract class AbstractCuenta {
 	public void montoNegativo(final Double monto) {
 
 		if (monto > 0) {
-			;
+			
+			/**
+			 * verifica si el monto es negativo
+			 */
 		} else {
 			throw new CuentaBancariaException("Monto Invalido");
 		}

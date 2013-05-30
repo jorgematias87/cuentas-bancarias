@@ -61,6 +61,8 @@ public class CuentaTests {
 				 "al depositar $ 190.0 de una cuenta corriente con saldo $ 0.0 y descubiertoTotal $ 20.5 se obtienen descubiertoTotal $ 200 y Saldo $ 10.5",
 				 10.5, corriente.getSaldo(), 0.0);
 		
+		System.out.println(corriente.getComision());
+		
 //		Assert.assertEquals(
 //				 "al depositar $ 200.0 de una cuenta corriente con saldo $ 0.0 y descubiertoTotal $ 20.5 se obtienen descubiertoTotal $ 200 y Saldo $ 20.5",
 //				 20.5, corriente.getSaldo(), 0.0);

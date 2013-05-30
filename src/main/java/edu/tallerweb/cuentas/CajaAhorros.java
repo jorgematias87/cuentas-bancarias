@@ -27,7 +27,7 @@ public class CajaAhorros extends AbstractCuenta {
 		if (cont > extraccion) {
 			super.extraer(monto);
 			super.extraer(costoAdicional);
-		}else {
+		} else {
 			super.extraer(monto);
 		}
 

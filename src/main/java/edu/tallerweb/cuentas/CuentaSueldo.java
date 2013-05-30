@@ -10,7 +10,6 @@ public class CuentaSueldo extends AbstractCuenta {
 	/**
 	 * No hay reglas adicionales para el depósito
 	 */
-	
 
 	/**
 	 * No hay reglas adicionales para la extracción
