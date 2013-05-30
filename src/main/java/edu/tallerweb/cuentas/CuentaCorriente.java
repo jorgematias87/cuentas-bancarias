@@ -25,10 +25,8 @@ public class CuentaCorriente extends AbstractCuenta {
 	public CuentaCorriente(final Double descubiertoTotal) {
 
 		if (descubiertoTotal >= 0) {
-			
 			this.descubiertoTotal = descubiertoTotal;
 			this.descubiertoInicial = descubiertoTotal; 
-			
 		} else {
 			throw new CuentaBancariaException("Monto Invalido");
 		}
@@ -46,9 +44,7 @@ public class CuentaCorriente extends AbstractCuenta {
 		super.montoNegativo(monto);
 
 		if (this.comision == 0) {
-
 			super.depositar(monto);
-			
 		} else {
 			this.restaurarDescubierto(monto);
 		}
@@ -116,11 +112,8 @@ public class CuentaCorriente extends AbstractCuenta {
 	}
 
 	public void comisionDescubierto(final Double monto) {
-		
 		final Double porcentaje = 0.05;
-
 		this.comision = (monto - this.getSaldo()) * porcentaje + (monto - this.getSaldo());
-
 	}
 
 	public Double getComision() {
