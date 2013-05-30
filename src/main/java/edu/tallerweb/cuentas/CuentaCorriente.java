@@ -122,7 +122,7 @@ public class CuentaCorriente extends AbstractCuenta {
 
 		else {
 			this.descubiertoTotal -= this.comision;
-			super.saldo = 0.0;
+			super.setSaldo(0.0);
 		}
 
 	}
