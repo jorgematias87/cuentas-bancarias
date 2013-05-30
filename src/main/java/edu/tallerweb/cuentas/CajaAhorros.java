@@ -6,6 +6,13 @@ package edu.tallerweb.cuentas;
  */
 public class CajaAhorros extends CuentaSueldo {
 
+	/**
+	 * No hay reglas adicionales para el depósito
+	 * 
+	 * @param monto
+	 *            a depositar
+	 */
+
 	private int cont = 0;
 
 	/**
