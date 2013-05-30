@@ -99,7 +99,7 @@ public class CuentaCorriente extends AbstractCuenta {
 					"El monto a extraer es mayor al descubierto con impuesto disponible");
 		} else {
 			this.descubiertoTotal -= this.comision;
-			super.saldo = 0.0;
+			super.extraer(getSaldo());
 		}
 	}
 
