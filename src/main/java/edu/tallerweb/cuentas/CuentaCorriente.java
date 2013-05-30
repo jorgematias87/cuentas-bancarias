@@ -28,7 +28,8 @@ public class CuentaCorriente extends AbstractCuenta {
 
 		if (descubiertoTotal >= 0) {
 			this.descubiertoTotal = descubiertoTotal;
-			this.descubiertoInicial = descubiertoTotal;}
+			this.descubiertoInicial = descubiertoTotal; 
+		}
 
 		else {
 			throw new CuentaBancariaException("Monto Invalido");
@@ -48,7 +49,8 @@ public class CuentaCorriente extends AbstractCuenta {
 
 		if (this.comision == 0) {
 
-			super.depositar(monto);}
+			super.depositar(monto);
+		}
 
 		else {
 			this.restaurarDescubierto(monto);
@@ -73,7 +75,8 @@ public class CuentaCorriente extends AbstractCuenta {
 				super.extraer(monto);
 			} catch (CuentaBancariaException ex) {
 				this.extraerEnDescubierto(monto);
-			}}
+			}
+		}
 
 		else {
 			throw new CuentaBancariaException(
@@ -85,12 +88,14 @@ public class CuentaCorriente extends AbstractCuenta {
 	public void restaurarDescubierto(final Double monto) {
 
 		if ((monto + this.descubiertoTotal) < this.descubiertoInicial) {
-			this.descubiertoTotal += monto;}
+			this.descubiertoTotal += monto;
+		}
 
 		else {
 			if (monto == this.descubiertoInicial) {
 				super.depositar(this.descubiertoTotal);
-				this.descubiertoTotal = this.descubiertoInicial;}
+				this.descubiertoTotal = this.descubiertoInicial;
+			}
 
 			else {
 				super.depositar((monto + this.descubiertoTotal)
@@ -106,7 +111,8 @@ public class CuentaCorriente extends AbstractCuenta {
 
 		if ((this.descubiertoTotal - this.comision) < 0) {
 			throw new CuentaBancariaException(
-					"El monto a extraer es mayor al descubierto con impuesto disponible");}
+					"El monto a extraer es mayor al descubierto con impuesto disponible");
+		}
 
 		else {
 			this.descubiertoTotal -= this.comision;

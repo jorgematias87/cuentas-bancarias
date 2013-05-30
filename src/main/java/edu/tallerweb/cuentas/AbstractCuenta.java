@@ -29,19 +29,20 @@ public abstract class AbstractCuenta {
 		this.montoNegativo(monto);
 
 		if (this.saldo >= monto) {
-			this.saldo -= monto;}
+			this.saldo -= monto;
+		}
 
 		else {
-			throw new CuentaBancariaException(
-					"El monto a extraer es mayor al saldo disponible");
+			throw new CuentaBancariaException("El monto a extraer es mayor al saldo disponible");
 		}
 
 	}
 
 	public void montoNegativo(final Double monto) {
 
-		if ( monto > 0) {
-			;}
+		if (monto > 0) {
+			;
+		}
 
 		else {
 			throw new CuentaBancariaException("Monto Invalido");
