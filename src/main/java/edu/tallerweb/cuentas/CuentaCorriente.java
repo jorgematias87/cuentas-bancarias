@@ -26,7 +26,7 @@ public class CuentaCorriente extends AbstractCuenta {
 
 		if (descubiertoTotal >= 0) {
 			this.descubiertoTotal = descubiertoTotal;
-			this.descubiertoInicial = descubiertoTotal; 
+			this.descubiertoInicial = descubiertoTotal;
 		} else {
 			throw new CuentaBancariaException("Monto Invalido");
 		}
